@@ -1,0 +1,37 @@
+//General dependencies file
+ext {
+
+    // Dependencies versions
+    kotlinVersion = '1.4.21'
+
+    // Android dependencies versions
+    androidxCoreVersion = '1.3.2'
+    androidxAppcompatVersion = '1.2.0'
+
+    // Test dependencies
+    junitVersion = '4.13.1'
+
+    // Android test dependencies
+    androidxTestJunitVersion = '1.1.2'
+    androidxTestEspressoVersion = '3.3.0'
+
+    libraryDependencies = [
+        kotlin: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    ]
+
+    androidDependencies = [
+            androidxCore: "androidx.core:core-ktx:$androidxCoreVersion",
+            androidxAppcompat: "androidx.appcompat:appcompat:$androidxAppcompatVersion"
+    ]
+
+    testDependencies = [
+            junit: "junit:junit:$junitVersion"
+    ]
+
+    androidTestDependencies = [
+            androidxTestJunit: "androidx.test.ext:junit:$androidxTestJunitVersion",
+            androidxTestEspresso: "androidx.test.espresso:espresso-core:$androidxTestEspressoVersion"
+    ]
+
+
+}

@@ -1,0 +1,14 @@
+//General dependencies file
+ext {
+
+    buildConfig = [
+            compileSdkVersion: 30,
+            applicationId: "br.com.nerdrapido.chucknorrisjokeapp",
+            minSdkVersion: 19,
+            targetSdkVersion: 30,
+            versionCode: 1,
+            versionName: "1.0",
+            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner",
+            buildToolsVersion: '30.0.3'
+    ]
+}

@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+configurations {
+    compile.exclude module: 'domain'
+}
+
+dependencies {
+    implementation project(':data')
+    implementation libraryDependencies.kotlin
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

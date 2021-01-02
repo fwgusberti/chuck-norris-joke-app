@@ -1,2 +1,6 @@
+include ':remote'
+include ':presentation'
+include ':domain'
+include ':data'
 include ':app'
 rootProject.name = "Chuck Norris Joke App"

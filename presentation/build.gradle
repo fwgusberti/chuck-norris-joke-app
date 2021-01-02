@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -6,12 +6,12 @@ android {
     compileSdkVersion buildConfig.compileSdkVersion
 
     defaultConfig {
-        applicationId buildConfig.applicationId
         minSdkVersion buildConfig.minSdkVersion
         targetSdkVersion buildConfig.targetSdkVersion
         versionCode buildConfig.versionCode
         versionName buildConfig.versionName
         testInstrumentationRunner buildConfig.testInstrumentationRunner
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -21,15 +21,18 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildToolsVersion buildConfig.buildToolsVersion
 }
 
 dependencies {
     implementation project(':domain')
-    implementation project(':presentation')
-    implementation project(':data')
-    implementation project(':remote')
+    implementation libraryDependencies.kotlin
+    implementation androidDependencies.androidxCore
+    implementation androidDependencies.androidxAppcompat
+    testImplementation testDependencies.junit
+    androidTestImplementation androidTestDependencies.androidxTestJunit
+    androidTestImplementation androidTestDependencies.androidxTestEspresso
 }
