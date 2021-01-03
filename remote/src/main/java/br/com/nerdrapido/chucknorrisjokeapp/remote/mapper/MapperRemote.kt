@@ -12,4 +12,5 @@ interface MapperRemote<R : RemoteEntity, D : DataEntity> {
      * Maps an Remote object entity to Data object.
      */
     fun mapFromRemoteToData(type: R): D
+
 }

@@ -6,8 +6,7 @@ import br.com.nerdrapido.chucknorrisjokeapp.data.service.JokeService
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.*
 import java.util.*
 
 /**
@@ -25,6 +24,8 @@ class JokeRepositoryImplTest {
 
     @Test
     fun `test JokeRepositoryImpl getRandomJokes`() {
+
+        val quantityOfJokes = 1
 
         val jokeData = listOf(
             JokeData(
@@ -47,8 +48,8 @@ class JokeRepositoryImplTest {
 
             doReturn(
                 jokeData
-            ).`when`(service).getRandomJokes()
-            val jokeDomain = repository.getRandomJokes()
+            ).`when`(service).getRandomJokes(quantityOfJokes)
+            val jokeDomain = repository.getRandomJokes(quantityOfJokes)
             Assert.assertTrue(jokeDomain.size == 1)
             Assert.assertEquals(id, jokeDomain[0].id)
             Assert.assertEquals(categories, jokeDomain[0].categories)

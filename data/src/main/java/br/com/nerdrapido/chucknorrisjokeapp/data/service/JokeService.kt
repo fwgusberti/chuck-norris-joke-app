@@ -7,5 +7,5 @@ import br.com.nerdrapido.chucknorrisjokeapp.data.model.JokeData
  */
 interface JokeService {
 
-    suspend fun getRandomJokes(): List<JokeData>
+    suspend fun getRandomJokes(quantity: Int): List<JokeData>
 }

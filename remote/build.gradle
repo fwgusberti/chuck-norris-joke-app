@@ -21,7 +21,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = jacocoVersion
 }
 
 task testRemote(dependsOn: [':data:compileJava', ':remote:compileJava', ':remote:test']) {

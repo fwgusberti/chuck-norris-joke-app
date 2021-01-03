@@ -13,7 +13,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = jacocoVersion
 }
 
 task testData(dependsOn: [':data:compileJava', ':data:test']) {

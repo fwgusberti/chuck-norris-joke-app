@@ -13,7 +13,7 @@ class JokeRepositoryImpl(
     private val jokeMapperData: JokeMapperData
 ) : JokeRepository {
 
-    override suspend fun getRandomJokes(): List<JokeDomain> {
-        return jokeMapperData.mapFromDataToRemoteList(jokeService.getRandomJokes())
+    override suspend fun getRandomJokes(quantity : Int): List<JokeDomain> {
+        return jokeMapperData.mapFromDataToRemoteList(jokeService.getRandomJokes(quantity))
     }
 }

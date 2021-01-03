@@ -4,6 +4,7 @@ buildscript {
     apply from: 'build_config.gradle'
 
     ext.kotlin_version = rootProject.ext.kotlinVersion
+    ext.jacocoVersion = '0.8.6'
     ext.buildConfig = rootProject.ext.buildConfig
     ext.libraryDependencies = rootProject.ext.libraryDependencies
     ext.androidDependencies = rootProject.ext.androidDependencies
@@ -24,8 +25,6 @@ buildscript {
 
 }
 
-apply plugin: 'jacoco'
-
 allprojects {
     repositories {
         google()
@@ -37,15 +36,10 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-task testAll(dependsOn: [
-        ':remote:testRemote'
+task runAllJacocoTestReports(dependsOn: [
+        ':remote:jacocoTestReportRemote',
+        ':data:jacocoTestReportData',
+        ':domain:jacocoTestReportDomain'
 ]) {
-    group = 'custom_tasks'
-    description = "Run all tests"
+    group = 'test'
 }
-
-jacoco {
-    toolVersion = "0.8.5"
-}
-
-task runAllJacocoTestReports(dependsOn: ['testAll', ':remote:jacocoTestReportRemote'])

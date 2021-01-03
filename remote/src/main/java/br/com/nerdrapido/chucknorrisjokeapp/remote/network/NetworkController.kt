@@ -23,7 +23,7 @@ class NetworkController(
         .build()
 
     /**
-     * Retorna o OkHttpClient.
+     * Returns an OkHttpClient.
      */
     private fun getInterceptor(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
