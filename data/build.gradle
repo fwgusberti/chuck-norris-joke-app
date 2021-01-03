@@ -4,6 +4,8 @@ apply plugin: 'kotlin'
 dependencies {
     implementation project(':domain')
     implementation libraryDependencies.kotlin
+
+    testImplementation testDependencies.junit
 }
 
 sourceCompatibility = "1.8"

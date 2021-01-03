@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion buildConfig.compileSdkVersion
@@ -19,12 +20,41 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
     }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
     buildToolsVersion buildConfig.buildToolsVersion
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+
+    sourceSets {
+        test {
+            java.srcDirs += "$projectDir/src/testShared"
+        }
+
+        androidTest {
+            java.srcDirs += "$projectDir/src/testShared"
+        }
+    }
+
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
 }
 
 dependencies {
@@ -32,4 +62,15 @@ dependencies {
     implementation project(':presentation')
     implementation project(':data')
     implementation project(':remote')
+
+    // Test
+    testImplementation testDependencies.junit
+
+    // Android Test
+    androidTestImplementation testDependencies.junit
+    androidTestImplementation androidTestDependencies.androidxTestJunit
+    androidTestImplementation androidTestDependencies.androidxTestCore
+
+    // Espresso dependencies
+    androidTestImplementation androidTestDependencies.androidxTestEspressoCore
 }

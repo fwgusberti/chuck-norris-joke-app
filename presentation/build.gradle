@@ -32,7 +32,15 @@ dependencies {
     implementation libraryDependencies.kotlin
     implementation androidDependencies.androidxCore
     implementation androidDependencies.androidxAppcompat
+
+    // Test
     testImplementation testDependencies.junit
+
+    // Android Test
+    androidTestImplementation testDependencies.junit
     androidTestImplementation androidTestDependencies.androidxTestJunit
-    androidTestImplementation androidTestDependencies.androidxTestEspresso
+    androidTestImplementation androidTestDependencies.androidxTestCore
+
+    // Espresso dependencies
+    androidTestImplementation androidTestDependencies.androidxTestEspressoCore
 }

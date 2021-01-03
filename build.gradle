@@ -24,6 +24,8 @@ buildscript {
 
 }
 
+apply plugin: 'jacoco'
+
 allprojects {
     repositories {
         google()
@@ -34,3 +36,16 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task testAll(dependsOn: [
+        ':remote:testRemote'
+]) {
+    group = 'custom_tasks'
+    description = "Run all tests"
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+task runAllJacocoTestReports(dependsOn: ['testAll', ':remote:jacocoTestReportRemote'])
