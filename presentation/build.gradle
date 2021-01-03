@@ -29,6 +29,11 @@ android {
 dependencies {
     implementation project(':domain')
     implementation libraryDependencies.kotlin
+
+
+
+    // Android dependencies
+    implementation androidDependencies.timber
     implementation androidDependencies.androidxCore
     implementation androidDependencies.androidxAppcompat
 

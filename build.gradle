@@ -39,7 +39,8 @@ task clean(type: Delete) {
 task runAllJacocoTestReports(dependsOn: [
         ':remote:jacocoTestReportRemote',
         ':data:jacocoTestReportData',
-        ':domain:jacocoTestReportDomain'
+        ':domain:jacocoTestReportDomain',
+        ':app:jacocoTestReportApp'
 ]) {
     group = 'test'
 }

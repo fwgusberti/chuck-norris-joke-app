@@ -11,6 +11,15 @@
         android:theme="@style/AppTheme" >
         <uses-library android:name="android.test.runner"
             android:required="false" />
+        <activity
+            android:name="br.com.nerdrapido.chucknorrisjokeapp.splash.SplashScreenActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,17 +1,21 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'jacoco'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'jacoco'
+}
 
 android {
     compileSdkVersion buildConfig.compileSdkVersion
+    buildToolsVersion buildConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId buildConfig.applicationId
         minSdkVersion buildConfig.minSdkVersion
         targetSdkVersion buildConfig.targetSdkVersion
         versionCode buildConfig.versionCode
         versionName buildConfig.versionName
+
         testInstrumentationRunner buildConfig.testInstrumentationRunner
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -26,40 +30,20 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildToolsVersion buildConfig.buildToolsVersion
-
-    testOptions {
-        animationsDisabled = true
-
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
-            }
-        }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
-
-    sourceSets {
-        test {
-            java.srcDirs += "$projectDir/src/testShared"
-        }
-
-        androidTest {
-            java.srcDirs += "$projectDir/src/testShared"
-        }
-    }
-
-    useLibrary 'android.test.runner'
-    useLibrary 'android.test.base'
-    useLibrary 'android.test.mock'
 }
 
 dependencies {
-    implementation project(':presentation')
-    implementation project(':di')
 
+    implementation project(':domain')
+    implementation project(':presentation')
+    implementation project(':data')
+    implementation project(':remote')
 
     // Library dependencies
     implementation libraryDependencies.koinCore
@@ -69,8 +53,6 @@ dependencies {
     implementation androidDependencies.timber
     implementation androidDependencies.koinAndroid
     implementation androidDependencies.koinAndroidViewModel
-    implementation androidDependencies.androidxAppcompat
-    implementation androidDependencies.androidxConstraintlayout
 
     // Test
     testImplementation testDependencies.junit
@@ -79,6 +61,7 @@ dependencies {
     androidTestImplementation testDependencies.junit
     androidTestImplementation androidTestDependencies.androidxTestJunit
     androidTestImplementation androidTestDependencies.androidxTestCore
+    androidTestImplementation(androidTestDependencies.koinTest) { exclude group: 'org.mockito' }
 
     // Espresso dependencies
     androidTestImplementation androidTestDependencies.androidxTestEspressoCore
@@ -88,13 +71,13 @@ jacoco {
     toolVersion = jacocoVersion
 }
 
-task testApp(dependsOn: [':app:testDebugUnitTest', ':app:connectedDebugAndroidTest']) {
+task testDi(dependsOn: [':di:testDebugUnitTest', ':di:connectedDebugAndroidTest']) {
     group = 'Test'
     description = "Run app tests"
 }
 
-task jacocoTestReportApp(type: JacocoReport, dependsOn: [
-        'testApp',
+task jacocoTestReportDi(type: JacocoReport, dependsOn: [
+        'testDi',
         'createDebugCoverageReport'
 ]) {
     group = 'Test'
