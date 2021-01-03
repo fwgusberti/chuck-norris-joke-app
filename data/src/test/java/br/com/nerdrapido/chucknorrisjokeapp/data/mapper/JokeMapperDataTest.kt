@@ -1,6 +1,5 @@
-package br.com.nerdrapido.chucknorrisjokeapp.data
+package br.com.nerdrapido.chucknorrisjokeapp.data.mapper
 
-import br.com.nerdrapido.chucknorrisjokeapp.data.mapper.JokeMapperData
 import br.com.nerdrapido.chucknorrisjokeapp.data.model.JokeData
 import org.junit.Assert
 import org.junit.Test
@@ -41,5 +40,29 @@ class JokeMapperDataTest {
         Assert.assertEquals(updatedAtTimestamp, jokeDomain.updatedAt.time)
         Assert.assertEquals(url, jokeDomain.url)
         Assert.assertEquals(value, jokeDomain.value)
+    }
+
+    @Test
+    fun `test mapFromDataToDomainList on JokeMapperData`() {
+        val jokeData = listOf(
+            JokeData(
+                id,
+                categories,
+                Date(createdAtTimestamp),
+                iconUrl,
+                Date(updatedAtTimestamp),
+                url,
+                value
+            )
+        )
+        val jokeDomain = jokeMapper.mapFromDataToRemoteList(jokeData)
+        Assert.assertTrue(jokeDomain.size == 1)
+        Assert.assertEquals(id, jokeDomain[0].id)
+        Assert.assertEquals(categories, jokeDomain[0].categories)
+        Assert.assertEquals(createdAtTimestamp, jokeDomain[0].createdAt.time)
+        Assert.assertEquals(iconUrl, jokeDomain[0].iconUrl)
+        Assert.assertEquals(updatedAtTimestamp, jokeDomain[0].updatedAt.time)
+        Assert.assertEquals(url, jokeDomain[0].url)
+        Assert.assertEquals(value, jokeDomain[0].value)
     }
 }

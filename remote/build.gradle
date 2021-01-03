@@ -25,7 +25,7 @@ jacoco {
 }
 
 task testRemote(dependsOn: [':data:compileJava', ':remote:compileJava', ':remote:test']) {
-    group = 'custom_tasks'
+    group = 'Test'
     description = "Run remote tests"
 }
 
@@ -34,6 +34,8 @@ task jacocoTestReportRemote(type: JacocoReport, dependsOn: [
         'jacocoTestReport',
         'jacocoTestCoverageVerification'
 ]) {
+    group = 'Test'
+
     reports {
         xml.enabled = true
         html.enabled = true

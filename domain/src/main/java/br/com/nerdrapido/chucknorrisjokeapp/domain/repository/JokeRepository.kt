@@ -10,5 +10,5 @@ interface JokeRepository {
     /**
      * @return a random list of jokes.
      */
-    fun getRandomJokes() : List<JokeDomain>
+    suspend fun getRandomJokes() : List<JokeDomain>
 }

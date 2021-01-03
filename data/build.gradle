@@ -5,6 +5,7 @@ apply plugin: 'jacoco'
 dependencies {
     implementation project(':domain')
     implementation libraryDependencies.kotlin
+    implementation libraryDependencies.coroutines
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
@@ -16,7 +17,7 @@ jacoco {
 }
 
 task testData(dependsOn: [':data:compileJava', ':data:test']) {
-    group = 'custom_tasks'
+    group = 'Test'
     description = "Run data tests"
 }
 
@@ -25,6 +26,8 @@ task jacocoTestReportData(type: JacocoReport, dependsOn: [
         'jacocoTestReport',
         'jacocoTestCoverageVerification'
 ]) {
+    group = 'Test'
+
     reports {
         xml.enabled = true
         html.enabled = true

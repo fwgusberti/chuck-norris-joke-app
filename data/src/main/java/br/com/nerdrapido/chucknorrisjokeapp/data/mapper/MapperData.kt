@@ -13,4 +13,15 @@ interface MapperData<D : DataEntity, O : DomainEntity> {
      */
     fun mapFromDataToRemote(type: D): O
 
+    /**
+     * Maps an Remote objects entity to Data objects List.
+     */
+    fun mapFromDataToRemoteList(types: List<D>): List<O> {
+        val output = mutableListOf<O>()
+        types.forEach {
+            output.add(mapFromDataToRemote(it))
+        }
+        return output
+    }
+
 }
