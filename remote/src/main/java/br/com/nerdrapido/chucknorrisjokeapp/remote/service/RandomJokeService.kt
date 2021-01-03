@@ -1,6 +1,6 @@
 package br.com.nerdrapido.chucknorrisjokeapp.remote.service
 
-import br.com.nerdrapido.chucknorrisjokeapp.remote.model.Joke
+import br.com.nerdrapido.chucknorrisjokeapp.remote.model.JokeRemote
 import retrofit2.http.GET
 
 /**
@@ -12,6 +12,6 @@ interface RandomJokeService {
      * Returns a ramdom Joke.
      */
     @GET("random")
-    suspend fun getRandomJoke(): Joke
+    suspend fun getRandomJoke(): JokeRemote
 
 }

@@ -1,5 +1,6 @@
 package br.com.nerdrapido.chucknorrisjokeapp.remote.network
 
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.MockitoAnnotations
@@ -17,6 +18,6 @@ class NetworkControllerTest {
     @Test
     fun `test NetworkController startup`() {
         val networkController = NetworkController()
-        val retrofit = networkController.retrofit
+        Assert.assertNotNull(networkController.retrofit)
     }
 }

@@ -6,7 +6,7 @@ import org.junit.Test
 /**
  * Created By FELIPE GUSBERTI @ 02/01/2021
  */
-class JokeTest {
+class JokeRemoteTest {
 
     private val id: String = "12345asdasd"
     private val categories: List<String> = emptyList()
@@ -18,7 +18,7 @@ class JokeTest {
 
     @Test
     fun `Joke hydrate test`() {
-        val joke = Joke(
+        val joke = JokeRemote(
             id,
             categories,
             createdAt,

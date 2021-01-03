@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created By FELIPE GUSBERTI @ 02/01/2021
  */
-data class Joke(
+data class JokeRemote(
 
     /**
      * Id of the joke. Ex.: "HwaAStnqSc6arCrrRoUATw".
@@ -49,4 +49,4 @@ data class Joke(
      * The actual Joke itself.
      */
     val value: String
-)
+) : RemoteEntity
