@@ -62,6 +62,14 @@ dependencies {
     implementation project(':data')
     implementation project(':remote')
 
+    // Library dependencies
+    implementation libraryDependencies.koinCore
+    implementation libraryDependencies.koinExt
+
+    // Android dependencies
+    implementation androidDependencies.timber
+    implementation androidDependencies.koinAndroid
+
     // Test
     testImplementation testDependencies.junit
 
