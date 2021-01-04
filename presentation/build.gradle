@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion buildConfig.compileSdkVersion
@@ -18,6 +19,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -26,11 +32,14 @@ android {
     buildToolsVersion buildConfig.buildToolsVersion
 }
 
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
 dependencies {
+
     implementation project(':domain')
     implementation libraryDependencies.kotlin
-
-
+    implementation libraryDependencies.coroutines
 
     // Android dependencies
     implementation androidDependencies.timber
@@ -44,7 +53,46 @@ dependencies {
     androidTestImplementation testDependencies.junit
     androidTestImplementation androidTestDependencies.androidxTestJunit
     androidTestImplementation androidTestDependencies.androidxTestCore
+    androidTestImplementation androidTestDependencies.androidxArchCoreTesting
+    androidTestImplementation androidTestDependencies.mockitoAndroid
 
     // Espresso dependencies
     androidTestImplementation androidTestDependencies.androidxTestEspressoCore
+}
+
+jacoco {
+    toolVersion = jacocoVersion
+}
+
+task testPresentation(dependsOn: [':presentation:testDebugUnitTest',
+                                  ':presentation:connectedDebugAndroidTest',
+                                  ':presentation:test']) {
+    group = 'Test'
+    description = "Run presentation tests"
+}
+
+task jacocoTestReportPresentation(type: JacocoReport, dependsOn: [
+        'testPresentation',
+        'createDebugCoverageReport'
+]) {
+    group = 'Test'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugJava = fileTree(dir: "${buildDir}/intermediates/classes/debugUnitTest", excludes: fileFilter)
+    def debugKotlin = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    getSourceDirectories().setFrom(files([mainSrc]))
+    getClassDirectories().setFrom(files([debugJava, debugKotlin]))
+    getExecutionData().setFrom(
+            fileTree(dir: "$buildDir", includes: [
+                    "jacoco/testDebugUnitTest.exec",
+                    "outputs/code_coverage/debugAndroidTest/connected/*coverage.ec"
+            ])
+    )
 }

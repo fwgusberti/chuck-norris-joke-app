@@ -30,6 +30,11 @@ allprojects {
         google()
         jcenter()
     }
+    // < Adicionado por defeito no mockito https://github.com/mockito/mockito/issues/2007
+    configurations.all {
+        resolutionStrategy.force 'org.objenesis:objenesis:2.6'
+    }
+    // >
 }
 
 task clean(type: Delete) {
@@ -40,7 +45,9 @@ task runAllJacocoTestReports(dependsOn: [
         ':remote:jacocoTestReportRemote',
         ':data:jacocoTestReportData',
         ':domain:jacocoTestReportDomain',
-        ':app:jacocoTestReportApp'
+        ':app:jacocoTestReportApp',
+        ':di:jacocoTestReportDi',
+        ':presentation:jacocoTestReportPresentation'
 ]) {
     group = 'test'
 }

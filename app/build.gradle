@@ -56,6 +56,9 @@ android {
     useLibrary 'android.test.mock'
 }
 
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
 dependencies {
     implementation project(':presentation')
     implementation project(':di')

@@ -38,6 +38,9 @@ android {
     }
 }
 
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
 dependencies {
 
     implementation project(':domain')
@@ -73,7 +76,7 @@ jacoco {
 
 task testDi(dependsOn: [':di:testDebugUnitTest', ':di:connectedDebugAndroidTest']) {
     group = 'Test'
-    description = "Run app tests"
+    description = "Run di tests"
 }
 
 task jacocoTestReportDi(type: JacocoReport, dependsOn: [

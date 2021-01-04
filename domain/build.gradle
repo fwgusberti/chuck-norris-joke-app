@@ -5,13 +5,15 @@ apply plugin: 'jacoco'
 
 dependencies {
     implementation libraryDependencies.kotlin
-
     implementation libraryDependencies.coroutines
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
     testImplementation testDependencies.mockitoInline
 }
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 jacoco {
     toolVersion = jacocoVersion

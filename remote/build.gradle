@@ -20,6 +20,9 @@ dependencies {
     testImplementation testDependencies.mockitoInline
 }
 
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
 jacoco {
     toolVersion = jacocoVersion
 }
