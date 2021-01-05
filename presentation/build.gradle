@@ -29,6 +29,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+
     buildToolsVersion buildConfig.buildToolsVersion
 }
 
@@ -48,13 +57,18 @@ dependencies {
 
     // Test
     testImplementation testDependencies.junit
+    testImplementation androidTestDependencies.androidxTestJunit
+    testImplementation androidTestDependencies.androidxTestCore
+    testImplementation androidTestDependencies.androidxArchCoreTesting
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoInline
+
 
     // Android Test
     androidTestImplementation testDependencies.junit
     androidTestImplementation androidTestDependencies.androidxTestJunit
     androidTestImplementation androidTestDependencies.androidxTestCore
     androidTestImplementation androidTestDependencies.androidxArchCoreTesting
-    androidTestImplementation androidTestDependencies.mockitoAndroid
 
     // Espresso dependencies
     androidTestImplementation androidTestDependencies.androidxTestEspressoCore
@@ -64,9 +78,7 @@ jacoco {
     toolVersion = jacocoVersion
 }
 
-task testPresentation(dependsOn: [':presentation:testDebugUnitTest',
-                                  ':presentation:connectedDebugAndroidTest',
-                                  ':presentation:test']) {
+task testPresentation(dependsOn: [':presentation:testDebugUnitTest', ':presentation:connectedDebugAndroidTest']) {
     group = 'Test'
     description = "Run presentation tests"
 }
@@ -83,16 +95,14 @@ task jacocoTestReportPresentation(type: JacocoReport, dependsOn: [
     }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugJava = fileTree(dir: "${buildDir}/intermediates/classes/debugUnitTest", excludes: fileFilter)
     def debugKotlin = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     getSourceDirectories().setFrom(files([mainSrc]))
-    getClassDirectories().setFrom(files([debugJava, debugKotlin]))
+    getClassDirectories().setFrom(files([debugKotlin]))
     getExecutionData().setFrom(
             fileTree(dir: "$buildDir", includes: [
-                    "jacoco/testDebugUnitTest.exec",
-                    "outputs/code_coverage/debugAndroidTest/connected/*coverage.ec"
+                    "jacoco/testDebugUnitTest.exec"
             ])
     )
 }

@@ -8,7 +8,7 @@ import java.io.IOException
 /**
  * Created By FELIPE GUSBERTI @ 03/01/2021
  */
-interface UseCase<I : UseCaseInput, O> {
+interface UseCase<I : UseCaseInput?, O : Any> {
 
     /**
      * Executes the use case.

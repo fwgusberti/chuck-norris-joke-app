@@ -14,7 +14,7 @@ import java.util.*
 /**
  * Created By FELIPE GUSBERTI @ 03/01/2021
  */
-class RandomJokesUseCaseTest {
+class RandomJokesUseCaseImplTest {
 
     private val id: String = "12345asdasd"
     private val categories: List<String> = emptyList()
@@ -46,7 +46,7 @@ class RandomJokesUseCaseTest {
         ).`when`(jokeRepository).getRandomJokes(quantityOfJokes)
 
 
-        val useCase = RandomJokesUseCase(jokeRepository)
+        val useCase = RandomJokesUseCaseImpl(jokeRepository)
         val input = RandomJokesUseCase.Input(quantityOfJokes)
         when (val output = useCase.execute(input)) {
             is EntityWrapper.Success<List<JokeDomain>> -> {
@@ -71,7 +71,7 @@ class RandomJokesUseCaseTest {
         given(jokeRepository.getRandomJokes(quantityOfJokes)).willAnswer {
             throw IOException("Ooops")
         }
-        val useCase = RandomJokesUseCase(jokeRepository)
+        val useCase = RandomJokesUseCaseImpl(jokeRepository)
         val input = RandomJokesUseCase.Input(quantityOfJokes)
         when (val output = useCase.execute(input)) {
             is EntityWrapper.NetworkError -> Assert.assertNotNull(output.error)
@@ -85,7 +85,7 @@ class RandomJokesUseCaseTest {
         given(jokeRepository.getRandomJokes(1)).willAnswer {
             throw RuntimeException("Ooops")
         }
-        val useCase = RandomJokesUseCase(jokeRepository)
+        val useCase = RandomJokesUseCaseImpl(jokeRepository)
         val input = RandomJokesUseCase.Input()
         when (val output = useCase.execute(input)) {
             is EntityWrapper.GenericError -> Assert.assertNotNull(output.error)

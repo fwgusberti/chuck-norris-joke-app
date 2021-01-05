@@ -37,12 +37,11 @@ task jacocoTestReportDomain(type: JacocoReport, dependsOn: [
     }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugJava = fileTree(dir: "${buildDir}/intermediates/classes/debugUnitTest", excludes: fileFilter)
-    def debugKotlin = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def debugJava = fileTree(dir: "${buildDir}/classes", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     getSourceDirectories().setFrom(files([mainSrc]))
-    getClassDirectories().setFrom(files([debugJava, debugKotlin]))
+    getClassDirectories().setFrom(files([debugJava]))
     getExecutionData().setFrom(
             fileTree(dir: "$buildDir", includes: [
                     "jacoco/testDebugUnitTest.exec",

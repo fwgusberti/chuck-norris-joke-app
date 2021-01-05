@@ -3,7 +3,9 @@
 package br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.base
 
 import androidx.annotation.CallSuper
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.nerdrapido.chucknorrisjokeapp.domain.model.JokeDomain
 import timber.log.Timber
 
 /**
@@ -12,7 +14,17 @@ import timber.log.Timber
 abstract class BaseViewModel : ViewModel() {
 
     /**
-     * Chamado quando a view vai ser exibida.
+     * True when useCase returns API network error.
+     */
+    val isApiError = MutableLiveData<Boolean>()
+
+    /**
+     * True when useCase returns an unknown error.
+     */
+    val isUnknownError = MutableLiveData<Boolean>()
+
+    /**
+     * Called when view is about to be shown.
      */
     @CallSuper
     open fun onViewIsAboutToBeShown() {

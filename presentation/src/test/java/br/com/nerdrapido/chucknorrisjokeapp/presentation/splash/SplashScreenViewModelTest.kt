@@ -2,13 +2,13 @@ package br.com.nerdrapido.chucknorrisjokeapp.presentation.splash
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.splash.SplashScreenViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -16,8 +16,8 @@ import org.mockito.MockitoAnnotations
 /**
  * Created By FELIPE GUSBERTI @ 03/01/2021
  */
-@RunWith(AndroidJUnit4::class)
-class SplashScreenViewModelTest {
+@RunWith(JUnit4::class)
+class SplashScreenViewModelTest  {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
@@ -27,20 +27,18 @@ class SplashScreenViewModelTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
+        MockitoAnnotations.initMocks(this)
     }
 
     @Test
-    fun test_SplashScreenViewModel_splashEnded() {
+    fun test_SplashScreenViewModel_splashEnded() = runBlocking {
         val splashScreenViewModel = SplashScreenViewModel()
-
-        runBlocking {
-            splashScreenViewModel.splashEnded.observeForever(splashEndedObserver)
-            splashScreenViewModel.onViewIsAboutToBeShown()
-            Mockito.verify(
-                splashEndedObserver,
-                Mockito.timeout(1000)
-            ).onChanged(true)
-        }
+        splashScreenViewModel.splashEnded.observeForever(splashEndedObserver)
+        splashScreenViewModel.onViewIsAboutToBeShown()
+        Mockito.verify(
+            splashEndedObserver,
+            Mockito.timeout(1000)
+        ).onChanged(true)
     }
+
 }
