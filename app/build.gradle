@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'jacoco'
 
 android {
@@ -74,6 +75,7 @@ dependencies {
     implementation androidDependencies.koinAndroidViewModel
     implementation androidDependencies.androidxAppcompat
     implementation androidDependencies.androidxConstraintlayout
+    implementation androidDependencies.androidxViewPager2
 
     // Test
     testImplementation testDependencies.junit

@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.PersistableBundle
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.base.BaseViewModel
+import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.model.Joke
 
 /**
  * Created By FELIPE GUSBERTI @ 03/01/2021
@@ -53,6 +56,11 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
         viewModel.onViewIsAboutToBeShown()
     }
 
-    abstract fun registerObservers()
+    @CallSuper
+    open fun registerObservers() {
+        viewModel.isLoading.observe(this, getIsLoadingObserver())
+    }
+
+    abstract fun getIsLoadingObserver(): Observer<Boolean>
 
 }

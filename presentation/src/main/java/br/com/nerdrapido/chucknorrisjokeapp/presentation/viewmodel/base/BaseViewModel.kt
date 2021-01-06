@@ -24,6 +24,11 @@ abstract class BaseViewModel : ViewModel() {
     val isUnknownError = MutableLiveData<Boolean>()
 
     /**
+     * True when is loading data.
+     */
+    val isLoading = MutableLiveData<Boolean>()
+
+    /**
      * Called when view is about to be shown.
      */
     @CallSuper
