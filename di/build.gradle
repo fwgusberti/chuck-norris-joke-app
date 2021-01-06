@@ -51,6 +51,8 @@ dependencies {
     // Library dependencies
     implementation libraryDependencies.koinCore
     implementation libraryDependencies.koinExt
+    implementation libraryDependencies.retrofit
+
 
     // Android dependencies
     implementation androidDependencies.timber

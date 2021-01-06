@@ -1,5 +1,7 @@
 package br.com.nerdrapido.chucknorrisjokeapp.di
 
+import br.com.nerdrapido.chucknorrisjokeapp.domain.usecase.RandomJokesUseCase
+import br.com.nerdrapido.chucknorrisjokeapp.domain.usecase.RandomJokesUseCaseImpl
 import org.koin.dsl.module
 
 /**
@@ -7,6 +9,6 @@ import org.koin.dsl.module
  */
 object DomainModule {
     val module = module {
-
+        single<RandomJokesUseCase> { RandomJokesUseCaseImpl(get()) }
     }
 }

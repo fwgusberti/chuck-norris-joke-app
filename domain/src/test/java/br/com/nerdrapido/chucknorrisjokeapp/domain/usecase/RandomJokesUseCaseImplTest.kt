@@ -24,17 +24,18 @@ class RandomJokesUseCaseImplTest {
     private val url: String = "lzsidjflçdjf"
     private val value: String = "lzsidjflçdjf asdasd asdasd"
 
+    private val jokeDomain = JokeDomain(
+        id,
+        categories,
+        Date(createdAtTimestamp),
+        iconUrl,
+        Date(updatedAtTimestamp),
+        url,
+        value
+    )
+
     @Test
     fun `test execute RandomJokesUseCase success`() = runBlocking {
-        val jokeDomain = JokeDomain(
-            id,
-            categories,
-            Date(createdAtTimestamp),
-            iconUrl,
-            Date(updatedAtTimestamp),
-            url,
-            value
-        )
 
         val quantityOfJokes = 2
         val jokeRepository = mock(JokeRepository::class.java)
@@ -66,7 +67,7 @@ class RandomJokesUseCaseImplTest {
 
     @Test
     fun `test execute RandomJokesUseCase network error`() = runBlocking {
-        val quantityOfJokes = 2
+        val quantityOfJokes = 0
         val jokeRepository = mock(JokeRepository::class.java)
         given(jokeRepository.getRandomJokes(quantityOfJokes)).willAnswer {
             throw IOException("Ooops")
@@ -89,6 +90,24 @@ class RandomJokesUseCaseImplTest {
         val input = RandomJokesUseCase.Input()
         when (val output = useCase.execute(input)) {
             is EntityWrapper.GenericError -> Assert.assertNotNull(output.error)
+            else -> throw RuntimeException()
+        }
+    }
+
+    @Test
+    fun `test if execute with null Input returns 1 joke`() = runBlocking {
+        val jokeRepository = mock(JokeRepository::class.java)
+        doReturn(
+            listOf(
+                jokeDomain
+            )
+        ).`when`(jokeRepository).getRandomJokes(1)
+        val useCase = RandomJokesUseCaseImpl(jokeRepository)
+        when (val output = useCase.execute(null)) {
+            is EntityWrapper.Success<List<JokeDomain>> -> {
+                val jokes = output.value
+                Assert.assertEquals(1, jokes.size)
+            }
             else -> throw RuntimeException()
         }
     }

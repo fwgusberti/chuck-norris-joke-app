@@ -45,6 +45,14 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
         @Suppress("UNCHECKED_CAST")
         setContentView(layoutId)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        registerObservers()
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onViewIsAboutToBeShown()
+    }
+
+    abstract fun registerObservers()
 
 }

@@ -1,5 +1,7 @@
 package br.com.nerdrapido.chucknorrisjokeapp.di
 
+import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.jokelist.JokeListViewModel
+import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.splash.SplashScreenViewModel
 import org.koin.dsl.module
 
 /**
@@ -7,6 +9,7 @@ import org.koin.dsl.module
  */
 object PresentationModule {
     val module = module {
-
+        factory { SplashScreenViewModel() }
+        factory { JokeListViewModel(get()) }
     }
 }

@@ -16,6 +16,7 @@ private const val SERVER_URL = "https://api.chucknorris.io/jokes/"
 class NetworkController(
     private val serviceInterceptor: Interceptor? = null
 ) {
+
     val retrofit: Retrofit = Retrofit.Builder()
         .client(getInterceptor())
         .baseUrl(SERVER_URL)

@@ -1,5 +1,8 @@
 package br.com.nerdrapido.chucknorrisjokeapp.di
 
+import br.com.nerdrapido.chucknorrisjokeapp.data.mapper.JokeMapperData
+import br.com.nerdrapido.chucknorrisjokeapp.data.repository.JokeRepositoryImpl
+import br.com.nerdrapido.chucknorrisjokeapp.domain.repository.JokeRepository
 import org.koin.dsl.module
 
 /**
@@ -7,6 +10,9 @@ import org.koin.dsl.module
  */
 object DataModule {
     val module = module {
-
+        // Mapper
+        single { JokeMapperData() }
+        // Repos
+        single<JokeRepository> { JokeRepositoryImpl(get(), get()) }
     }
 }

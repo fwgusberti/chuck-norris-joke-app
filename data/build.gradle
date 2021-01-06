@@ -6,6 +6,8 @@ dependencies {
     implementation project(':domain')
     implementation libraryDependencies.kotlin
     implementation libraryDependencies.coroutines
+    implementation libraryDependencies.koinCore
+    implementation libraryDependencies.koinExt
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito

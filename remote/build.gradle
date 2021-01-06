@@ -14,14 +14,14 @@ dependencies {
     implementation libraryDependencies.retrofit
     implementation libraryDependencies.retrofitGson
     implementation libraryDependencies.okhttpLogging
+    implementation libraryDependencies.koinCore
+    implementation libraryDependencies.koinExt
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
     testImplementation testDependencies.mockitoInline
+    testImplementation androidTestDependencies.koinTest
 }
-
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
 
 jacoco {
     toolVersion = jacocoVersion
