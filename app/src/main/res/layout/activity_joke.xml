@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/jokeListActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/jokeFragmentContainerVp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topContainer">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_toolbar_top_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icoIv"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_tool_bar_height"
+                android:layout_marginStart="@dimen/size_main_side_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:text="@string/string_tool_bar_random_jokes_title"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/shareIv"
+                app:layout_constraintStart_toEndOf="@+id/icoIv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/shareIv"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_tool_bar_height"
+                android:layout_marginEnd="@dimen/size_main_side_margin"
+                android:src="@drawable/ic_baseline_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/jokePb"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_main_side_margin"
+            android:layout_marginEnd="@dimen/size_main_side_margin"
+            android:indeterminate="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topContainer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

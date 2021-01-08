@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Chuck Norris Joke App</string>
+    <string name="string_url_icon">https://assets.chucknorris.host/img/avatar/chuck-norris.png</string>
+    <string name="string_tool_bar_random_jokes_title">Random Jokes</string>
+    <string name="string_try_again">Try Again</string>
+    <string name="string_api_error_message">Sorry. Error loading the joke. Check your connection.</string>
+    <string name="string_error_message">Sorry. Error loading the joke.</string>
+    <string name="string_trying_again">Trying again!</string>
+    <string name="string_share">Share</string>
+    <string name="string_share_subject">Check This Chuck Norris Fact</string>
 </resources>

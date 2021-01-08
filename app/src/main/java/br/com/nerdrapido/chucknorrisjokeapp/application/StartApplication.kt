@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package br.com.nerdrapido.chucknorrisjokeapp.application
 
 import android.app.Application

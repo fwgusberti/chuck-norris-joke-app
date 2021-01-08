@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_tool_bar_height">40dp</dimen>
+    <dimen name="size_main_side_margin">24dp</dimen>
+    <dimen name="size_toolbar_top_margin">50dp</dimen>
+</resources>

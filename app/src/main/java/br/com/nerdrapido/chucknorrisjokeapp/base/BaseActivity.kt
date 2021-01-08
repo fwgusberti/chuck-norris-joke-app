@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.WindowManager
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.base.BaseViewModel
-import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.model.Joke
 
 /**
  * Created By FELIPE GUSBERTI @ 03/01/2021
@@ -47,6 +47,10 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
     protected open fun onCreateCall() {
         @Suppress("UNCHECKED_CAST")
         setContentView(layoutId)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         registerObservers()
     }

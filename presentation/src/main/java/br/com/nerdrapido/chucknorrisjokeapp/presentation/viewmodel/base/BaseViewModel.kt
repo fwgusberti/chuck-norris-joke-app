@@ -5,7 +5,7 @@ package br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.base
 import androidx.annotation.CallSuper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import br.com.nerdrapido.chucknorrisjokeapp.domain.model.JokeDomain
+import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.annotation.OpenForTesting
 import timber.log.Timber
 
 /**
@@ -26,6 +26,7 @@ abstract class BaseViewModel : ViewModel() {
     /**
      * True when is loading data.
      */
+    @OpenForTesting
     val isLoading = MutableLiveData<Boolean>()
 
     /**

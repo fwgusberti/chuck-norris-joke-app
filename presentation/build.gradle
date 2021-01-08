@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'jacoco'
+apply plugin: 'kotlin-allopen'
 
 android {
     compileSdkVersion buildConfig.compileSdkVersion
@@ -30,6 +31,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     testOptions {
         unitTests.all {
             jacoco {
@@ -41,24 +46,23 @@ android {
     buildToolsVersion buildConfig.buildToolsVersion
 }
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
 dependencies {
 
     implementation project(':domain')
     implementation libraryDependencies.kotlin
-    implementation libraryDependencies.coroutines
+//    implementation libraryDependencies.coroutines
     implementation libraryDependencies.koinCore
     implementation libraryDependencies.koinExt
 
     // Android dependencies
     implementation androidDependencies.timber
+    implementation androidDependencies.coroutinesAndroid
     implementation androidDependencies.androidxCore
     implementation androidDependencies.androidxAppcompat
 
     // Test
     testImplementation testDependencies.junit
+    testImplementation testDependencies.coroutinesTest
     testImplementation androidTestDependencies.androidxTestJunit
     testImplementation androidTestDependencies.androidxTestCore
     testImplementation androidTestDependencies.androidxArchCoreTesting
@@ -67,13 +71,17 @@ dependencies {
 
 
     // Android Test
-    androidTestImplementation testDependencies.junit
-    androidTestImplementation androidTestDependencies.androidxTestJunit
-    androidTestImplementation androidTestDependencies.androidxTestCore
-    androidTestImplementation androidTestDependencies.androidxArchCoreTesting
+//    androidTestImplementation testDependencies.junit
+//    androidTestImplementation androidTestDependencies.androidxTestJunit
+//    androidTestImplementation androidTestDependencies.androidxTestCore
+//    androidTestImplementation androidTestDependencies.androidxArchCoreTesting
 
     // Espresso dependencies
-    androidTestImplementation androidTestDependencies.androidxTestEspressoCore
+//    androidTestImplementation androidTestDependencies.androidxTestEspressoCore
+}
+
+allOpen {
+    annotation('br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.annotation.OpenForTesting')
 }
 
 jacoco {

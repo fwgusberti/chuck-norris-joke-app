@@ -4,7 +4,7 @@ ext {
     buildConfig = [
             compileSdkVersion: 30,
             applicationId: "br.com.nerdrapido.chucknorrisjokeapp",
-            minSdkVersion: 19,
+            minSdkVersion: 21,
             targetSdkVersion: 30,
             versionCode: 1,
             versionName: "1.0",

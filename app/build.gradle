@@ -30,6 +30,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     buildToolsVersion buildConfig.buildToolsVersion
 
     testOptions {
@@ -64,7 +69,6 @@ dependencies {
     implementation project(':presentation')
     implementation project(':di')
 
-
     // Library dependencies
     implementation libraryDependencies.koinCore
     implementation libraryDependencies.koinExt
@@ -76,6 +80,11 @@ dependencies {
     implementation androidDependencies.androidxAppcompat
     implementation androidDependencies.androidxConstraintlayout
     implementation androidDependencies.androidxViewPager2
+    implementation androidDependencies.androidxFragment
+    implementation androidDependencies.androidMaterial
+    implementation androidDependencies.glide
+    implementation androidDependencies.glideAnnotationProcessor
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 
     // Test
     testImplementation testDependencies.junit
@@ -84,9 +93,13 @@ dependencies {
     androidTestImplementation testDependencies.junit
     androidTestImplementation androidTestDependencies.androidxTestJunit
     androidTestImplementation androidTestDependencies.androidxTestCore
+    androidTestImplementation (androidTestDependencies.mockitoAndroid) { exclude module: 'objenesis' }
+    androidTestImplementation testDependencies.objenesis
+    androidTestImplementation(androidTestDependencies.koinTest) { exclude group: 'org.mockito' }
 
     // Espresso dependencies
     androidTestImplementation androidTestDependencies.androidxTestEspressoCore
+    androidTestImplementation androidTestDependencies.androidxTestEspressoContrib
 }
 
 jacoco {

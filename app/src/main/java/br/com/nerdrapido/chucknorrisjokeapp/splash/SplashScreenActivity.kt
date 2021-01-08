@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import br.com.nerdrapido.chucknorrisjokeapp.R
 import br.com.nerdrapido.chucknorrisjokeapp.base.BaseActivity
-import br.com.nerdrapido.chucknorrisjokeapp.jokelist.JokeListActivity
+import br.com.nerdrapido.chucknorrisjokeapp.joke.JokeActivity
 import br.com.nerdrapido.chucknorrisjokeapp.presentation.viewmodel.splash.SplashScreenViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -21,7 +21,7 @@ class SplashScreenActivity : BaseActivity<SplashScreenViewModel>() {
     override fun registerObservers() {
         super.registerObservers()
         viewModel.splashEnded.observe(this, Observer {
-            val newIntent = Intent(this, JokeListActivity::class.java)
+            val newIntent = Intent(this, JokeActivity::class.java)
             newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(newIntent)
@@ -31,5 +31,7 @@ class SplashScreenActivity : BaseActivity<SplashScreenViewModel>() {
     override fun getIsLoadingObserver(): Observer<Boolean> {
         return Observer { Timber.d("isLoading") }
     }
+
+
 
 }
