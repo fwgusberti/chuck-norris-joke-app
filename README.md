@@ -9,7 +9,7 @@ https://api.chucknorris.io
 
 * Arquitetura MVVM
 * Utilizado prática TDD (ish) com testes unitários e instrumentados (JUnit e Espresso)
-* Cobertura do Jacoco https://drive.google.com/file/d/15QdBlFGMpk1pon8EYxOT--ZKrZYvLwDh/view?usp=sharing
+* Cobertura do Jacoco https://drive.google.com/file/d/185i9VdVW04K7_reUHa2xYkazntKCu8E-/view?usp=sharing
 Rodar task jacocoTestReportClean do gradle para verificar (Exige android físico para o espresso e podem ocorrer problemas em alguns aparelhos)
 
 ### Próximos passos
